@@ -1,2 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svs:ValueSet xmlns:svs="urn:ihe:iti:svs:2008" id="2.25.03677690829528753964495199895051016128851831706032" displayName="Gender" version="1"><svs:ConceptList xml:lang="en-US"><svs:Concept displayName="Female" code="Female" codeSystem="ihris-manage-liberia"/><svs:Concept displayName="Male" code="Male" codeSystem="ihris-manage-liberia"/></svs:ConceptList></svs:ValueSet>
+<svs:ValueSet xmlns:svs="urn:ihe:iti:svs:2008" id="2.25.03677690829528753964495199895051016128851831706032" displayName="Gender" version="1">
+  <svs:ConceptList xml:lang="en-US">
+    <svs:Concept displayName="Female" code="Female" codeSystem="ihris-manage-liberia"/>
+    <svs:Concept displayName="Male" code="Male" codeSystem="ihris-manage-liberia"/>
+  </svs:ConceptList>
+</svs:ValueSet>
