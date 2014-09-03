@@ -1,10 +1,2 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svs:ValueSet xmlns:svs="urn:ihe:iti:svs:2008" id="2.25.265608663818616228188834890512310231251363785626032" displayName="Council" version="1">
-  <svs:ConceptList xml:lang="en-US">
-    <svs:Concept displayName="Liberian Association of Public Health Technicians" code="Liberian Association of Public Health Technicians" codeSystem="ihris-manage-liberia"/>
-    <svs:Concept displayName="Liberia Dental and Medical Board" code="Liberia Dental and Medical Board" codeSystem="ihris-manage-liberia"/>
-    <svs:Concept displayName="Nursing and Midwifery Board" code="Nursing and Midwifery Board" codeSystem="ihris-manage-liberia"/>
-    <svs:Concept displayName="Physician Assistant Board" code="Physician Assistant Board" codeSystem="ihris-manage-liberia"/>
-    <svs:Concept displayName="Medical Laboratory Association of Liberia" code="Medical Laboratory Association of Liberia" codeSystem="ihris-manage-liberia"/>
-  </svs:ConceptList>
-</svs:ValueSet>
+<svs:ValueSet xmlns:svs="urn:ihe:iti:svs:2008" id="2.25.265608663818616228188834890512310231251363785626032" displayName="Council" version="3"><svs:ConceptList xml:lang="en-US"><svs:Concept displayName="Liberian Association of Public Health Technicians" code="5" codeSystem="ihris-manage-liberia"/><svs:Concept displayName="Liberia Dental and Medical Board" code="2" codeSystem="ihris-manage-liberia"/><svs:Concept displayName="Nursing and Midwifery Board" code="1" codeSystem="ihris-manage-liberia"/><svs:Concept displayName="Physician Assistant Board" code="3" codeSystem="ihris-manage-liberia"/><svs:Concept displayName="Medical Laboratory Association of Liberia" code="4" codeSystem="ihris-manage-liberia"/></svs:ConceptList></svs:ValueSet>
