@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svs:ValueSet xmlns:svs="urn:ihe:iti:svs:2008" id="2.25.259359036081944859901459759453974543442705863430576" displayName="Language" version="3">
+<svs:ValueSet xmlns:svs="urn:ihe:iti:svs:2008" id="2.25.259359036081944859901459759453974543442705863430576" displayName="Liberia Manage Language" version="3">
   <svs:ConceptList xml:lang="en-US">
     <svs:Concept displayName="Via" code="1" codeSystem="ihris-manage-liberia"/>
     <svs:Concept displayName="Gio" code="10" codeSystem="ihris-manage-liberia"/>
