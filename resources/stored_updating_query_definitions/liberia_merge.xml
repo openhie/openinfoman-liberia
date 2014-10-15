@@ -8,7 +8,7 @@
   urn="urn:openhie.org:openinfoman-liberia:mhero-merge" 
   content-type="text/xml">
   <csd:description> 
-    Performs merge for Liberia mHero
+    Performs merge for Liberia preserving any mHero/RapidPRO identifiers for existing providers.
   </csd:description>
   <csd:definition ><xi:include parse='text' href='liberia_merge.xq'/></csd:definition>
   <xforms:instance>
