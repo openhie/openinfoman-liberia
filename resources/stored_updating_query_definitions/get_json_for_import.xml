@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<csd:careServicesFunction xmlns:ev="http://www.w3.org/2001/xml-events"
+  xmlns:xforms="http://www.w3.org/2002/xforms"
+  xmlns:hfp="http://www.w3.org/2001/XMLSchema-hasFacetAndProperty"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns:xi="http://www.w3.org/2001/XInclude"
+  xmlns:csd="urn:ihe:iti:csd:2013" 
+  urn="urn:openhie.org:openinfoman-rapidpro:get_json_for_import" content-type="application/json">
+  <csd:description> 
+    Get JSON representation of CSD for import to RapidPro via API
+  </csd:description>
+  <csd:definition ><xi:include parse='text' href='get_json_for_import.xq'/></csd:definition>
+  <xforms:instance>
+    <csd:careServicesRequest/>
+  </xforms:instance>
+  <csd:extension type='rapidpro' urn='urn:openhie.org:openinfoman:adapter'/>
+  <csd:extension type='get' urn='urn:openhie.org:openinfoman:adapter:rapidpro:action'/>
+</csd:careServicesFunction>
