@@ -18,7 +18,7 @@ for $doc  in $careServicesRequest/documents/document
 let $name := $doc/@resource
 let $src_doc :=
   if (not ($name  = '')) 
-  then if (not ($name = $mhero)) then csd_dm:open_document($csd_webconf:db, $name) else ()
+  then if (not ($name = $mhero)) then csd_dm:open_document( $name) else ()
   else $doc
 return mhero:merge_into($mhero_doc, $src_doc) 
 
