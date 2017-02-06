@@ -1,0 +1,14 @@
+[
+   {
+      "id":"JIVMtpjVZqJ",
+      "trigger_cond":2,
+      "trigger_msg":"Cases of Cholera have been identified this month",
+      "period":"monthly"
+   },
+   {
+      "id":"Tt5TAvdfdVK",
+      "trigger_cond":1,
+      "trigger_msg":"Cases of Cholera have been identified this week",
+      "period":"weekly"
+   }
+]
