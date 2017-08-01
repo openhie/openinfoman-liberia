@@ -1,11 +1,13 @@
 <?php
 $openinfoman = array(
-    'url'=>'http://localhost:8984/CSD/csr/mhero/careServicesRequest/urn:openhie.org:openinfoman-rapidpro:get_json_for_import/adapter/rapidpro/get'
+    'url'=>'http://localhost:8984/CSD/csr/mhero_liberia_ihris/careServicesRequest/urn:openhie.org:openinfoman-rapidpro:get_json_for_import/adapter/rapidpro/get',
+    'username'=>'oim',
+    'password'=>'oim'
     );
 
 $rapidpro= array(
-    'url' =>'https://rapidpro.io/api/v1/contacts.json',
-    'auth_token' => 'XXXX594545XXXXXX',
+    'url' =>'https://app.rapidpro.io/api/v2/contacts.json',
+    'auth_token' => '',
     'group_name' => '',
     );
 
@@ -26,7 +28,12 @@ if ($group_name = getenv('RAPIDPRO_GROUP_NAME')) {
     $rapidpro['group_name'] = $group_name;
 }
 
-if (! ($contacts_text = file_get_contents($openinfoman['url']))
+$context = stream_context_create(array(
+    'http' => array(
+        'header'  => "Authorization: Basic " . base64_encode($openinfoman['username'].":".$openinfoman['password'])
+    )
+));
+if (! ($contacts_text = file_get_contents($openinfoman['url'],false,$context))
     || ! is_array($contacts_json_full = json_decode($contacts_text,true))
     || ! array_key_exists('contacts',$contacts_json_full)
     || ! is_array($contacts_json = $contacts_json_full['contacts'])
@@ -38,11 +45,31 @@ if (! ($contacts_text = file_get_contents($openinfoman['url']))
     die("Could not do it. Sorry.");
 }
 $records = generate_records($contacts_json,$current,$rapidpro);
+
+
 foreach ($records as $record) {
     if(array_key_exists("group_uuids",$record))
-    unset($record["groups"]);
+    unset($record["groups"]);    
     $data_string = json_encode($record,JSON_NUMERIC_CHECK);
-print_r($data_string);
+$data = json_decode($data_string,true);
+foreach($data["urns"] as $id=>$urn) {
+$urn = trim($urn);
+$pos = strpos($urn,"+231");
+if($pos === false){
+        if(strpos($urn,"tel:0") !== false)
+        $urn = str_replace("tel:0","tel:+231",$urn);
+        else if(strpos($urn,"tel:8") !== false)
+        $urn = str_replace("tel:8","tel:+2318",$urn);
+        else if(strpos($urn,"tel:7") !== false)
+        $urn = str_replace("tel:7","tel:+2317",$urn);
+        else {
+        echo "Wrong====> ".$urn;
+        continue;
+        }
+}
+$data["urns"][$id] = $urn;
+}
+$data_string = json_encode($data,JSON_NUMERIC_CHECK);
     $ch = curl_init($rapidpro['url'] );
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
     curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
@@ -63,7 +90,7 @@ print_r($data_string);
         var_dump(curl_getinfo($ch));
     }
     curl_close($ch);
-    
+sleep(2);
 }
 
 if (array_key_exists('HTTP_HOST',$_SERVER)) {
@@ -89,8 +116,6 @@ function generate_records($contacts_json,$current,$rapidpro) {
             ){
             continue;
         }
-        $payroll_num=$fields["payrollnum"];
-        $payroll_issue_date=$fields["payrollissue"];
         if (array_key_exists($globalid,$current)) {
             $record = $current[$globalid];
             if (!array_key_exists('urns',$record)
@@ -102,8 +127,20 @@ function generate_records($contacts_json,$current,$rapidpro) {
                 if (in_array($urn,$record['urns'])){
                     continue;
                 }
+$pos = strpos($urn,"+231");
+if($pos === false){
+	if(strpos($urn,"tel:0") !== false)
+	$urn = str_replace("tel:0","tel:+231",$urn);
+	else if(strpos($urn,"tel:8") !== false)
+	$urn = str_replace("tel:8","tel:+2318",$urn);
+	else if(strpos($urn,"tel:7") !== false)
+        $urn = str_replace("tel:7","tel:+2317",$urn);
+	else {
+	echo "Wrong====> ".$urn;
+	continue;
+	}
+}
                 $record['urns'][] = $urn;
-                $record['fields']=array('globalid'=>$globalid,'payroll_number'=>$payroll_num,'payroll_issue_date'=>$payroll_issue_date);
             }
             if (array_key_exists('phone',$record)) {
                 $record['urns'] = array_unique(array_merge(array('tel:' . $record['phone']), $record['urns']));
@@ -112,11 +149,10 @@ function generate_records($contacts_json,$current,$rapidpro) {
         } else {
             $record = array(
                 'urns'=>$urns,
-                'fields'=>array('globalid'=>$globalid,'payroll_number'=>$payroll_num,'payroll_issue_date'=>$payroll_issue_date)
+                'fields'=>array('globalid'=>$globalid)
                 );
 
         }
-
         if (array_key_exists('name',$contact)){
             $record['name']= $contact['name'];
         }
