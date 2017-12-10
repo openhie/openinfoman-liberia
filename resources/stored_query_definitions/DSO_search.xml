@@ -7,7 +7,7 @@
   xmlns:csd="urn:ihe:iti:csd:2013"
   urn="urn:openhie.org:openinfoman-lb:dso_search" content-type="application/json">
   <csd:description>
-    Returns unique VIMS districts
+    Returns District Surveillance Officers
   </csd:description>
   <csd:definition ><xi:include parse='text' href='DSO_search.xq'/></csd:definition>
   <xforms:instance>
